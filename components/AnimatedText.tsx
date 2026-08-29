@@ -24,7 +24,7 @@ export function AnimatedText({
       className={`animated-text ${className}`.trim()}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      aria-hidden={decorative ? true : undefined}
+      {...(decorative ? { "aria-hidden": true } : {})}
     >
       {characters.map((character, index) => (
         <span key={`${character}-${index}`} className="animated-text__char">

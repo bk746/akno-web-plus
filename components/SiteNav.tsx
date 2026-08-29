@@ -17,7 +17,13 @@ const menuLinks = [
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { introComplete } = useIntro();
+  const introPending = mounted && !introComplete;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -29,7 +35,7 @@ export function SiteNav() {
   return (
     <>
       <header
-        className={`site-nav hero-header-enter ${introComplete ? "site-nav--intro-ready" : "site-nav--intro-pending"}`}
+        className={`site-nav hero-header-enter ${introPending ? "site-nav--intro-pending" : "site-nav--intro-ready"}`}
       >
         <a href="/" className="site-nav__logo" aria-label="Retour à l'accueil">
           <Image
@@ -39,7 +45,7 @@ export function SiteNav() {
             height={78}
             draggable={false}
             priority
-            className={`site-nav__logo-image ${introComplete ? "site-nav__logo-image--ready" : ""}`}
+            className={`site-nav__logo-image ${introPending ? "" : "site-nav__logo-image--ready"}`}
           />
         </a>
 
@@ -71,8 +77,7 @@ export function SiteNav() {
 
       <div
         className={`menu-overlay ${open ? "menu-overlay--open" : ""}`}
-        aria-hidden={!open}
-        inert={!open}
+        {...(!open ? { "aria-hidden": true } : {})}
       >
         <nav className="menu-overlay__nav" aria-label="Menu principal">
           {menuLinks.map((link, index) => (

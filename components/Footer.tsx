@@ -87,7 +87,7 @@ export function Footer() {
 
         <Reveal className="site-footer__bar" y={20} delay={0.18} duration={0.95}>
           <div className="site-footer__bar-left">
-            <span>© {new Date().getFullYear()} AKNO</span>
+            <span suppressHydrationWarning>© {new Date().getFullYear()} AKNO</span>
             <span className="site-footer__bar-sep" aria-hidden="true">
               ·
             </span>

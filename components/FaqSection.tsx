@@ -64,7 +64,7 @@ export function FaqSection() {
                   id={panelId}
                   role="region"
                   aria-labelledby={triggerId}
-                  aria-hidden={!isOpen}
+                  {...(!isOpen ? { "aria-hidden": true } : {})}
                   className={`faq-item__panel ${isOpen ? "faq-item__panel--open" : ""}`}
                 >
                   <div className="faq-item__panel-inner">

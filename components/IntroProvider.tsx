@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -44,6 +45,12 @@ export function IntroProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.remove("intro-pending");
     document.documentElement.classList.add("intro-complete");
   }, []);
+
+  useEffect(() => {
+    if (document.documentElement.classList.contains("intro-complete")) {
+      skipIntro();
+    }
+  }, [skipIntro]);
 
   const value = useMemo(
     () => ({
