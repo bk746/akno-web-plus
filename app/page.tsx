@@ -1,69 +1,158 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+import line2 from "@/src/images/line2.png";
+import lineHeroAkno from "@/src/images/line-hero-akno.png";
+import { EclypseOrb } from "@/components/EclypseOrb";
+import { IntroProvider } from "@/components/IntroProvider";
+import { SiteIntro } from "@/components/SiteIntro";
+import { SiteNav } from "@/components/SiteNav";
+import { HomePageShell } from "@/components/HomePageShell";
+import { TransitionLink } from "@/components/TransitionLink";
+import { HeroSocialLinks } from "@/components/HeroSocialLinks";
+import { RealisationsSection } from "@/components/RealisationsSection";
+import { ServicesSection } from "@/components/ServicesSection";
+import { CtaSection } from "@/components/CtaSection";
+import { AboutSection } from "@/components/AboutSection";
+import { FaqSection } from "@/components/FaqSection";
+import { Footer } from "@/components/Footer";
+import { createPageMetadata } from "@/lib/metadata";
+
+export const metadata: Metadata = createPageMetadata({
+  path: "/",
+});
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <IntroProvider>
+    <>
+      <Image
+        src={line2}
+        alt=""
+        width={1835}
+        height={1964}
+        draggable={false}
+        className="site-grid"
+        priority
+        sizes="100vw"
+      />
+
+      <SiteIntro />
+      <SiteNav />
+
+      <HomePageShell>
+      <section className="hero-section relative w-full overflow-hidden">
+
+      <div className="hero-orbs select-none">
+        <EclypseOrb
+          variant="hero"
+          className="hero-orb-enter absolute right-[60%] top-[7%] w-[min(17vw,240px)] max-md:right-[45%] max-md:top-[4%] max-md:w-[min(28vw,180px)]"
+          enterDelay="0.35s"
+          animationDelay="-2.5s"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        <EclypseOrb
+          variant="hero"
+          className="hero-orb-enter absolute right-[2%] top-1/2 w-[min(44vw,580px)] -translate-y-[48%] max-md:right-[-8%] max-md:w-[min(72vw,420px)]"
+          enterDelay="0.1s"
+          animationDelay="0s"
+        />
+
+        <EclypseOrb
+          variant="hero"
+          className="hero-orb-enter absolute right-[5%] bottom-[9%] w-[min(9vw,130px)] max-md:hidden"
+          enterDelay="0.55s"
+          animationDelay="-5s"
+        />
+      </div>
+
+      <div className="hero-line-wrap">
+        <Image
+          src={lineHeroAkno}
+          alt=""
+          width={3158}
+          height={248}
+          draggable={false}
+          className="hero-line-bottom hero-line-enter"
+          priority
+          sizes="100vw"
+        />
+      </div>
+
+      <div className="hero-content">
+        <h1 className="hero-title">
+          <span className="hero-title-line hero-enter" style={{ "--hero-delay": "0.12s" } as React.CSSProperties}>
+            Votre marque mérite une
+          </span>
+          <span
+            className="hero-title-line text-gradient hero-enter"
+            style={{ "--hero-delay": "0.22s" } as React.CSSProperties}
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            expérience sur mesure.
+          </span>
+        </h1>
+
+        <p
+          className="hero-subtitle mt-[1.375rem] hero-enter"
+          style={{ "--hero-delay": "0.34s" } as React.CSSProperties}
+        >
+          AKNO conçoit sites et produits digitaux pour les marques qui veulent
+          se démarquer — du design au lancement.
+        </p>
+
+        <div
+          className="hero-cta hero-enter"
+          style={{ "--hero-delay": "0.46s" } as React.CSSProperties}
+        >
+          <div className="hero-cta-row">
+            <TransitionLink href="/contacts" className="hero-btn hero-btn--primary">
+              <span className="hero-btn__label">Devis gratuit</span>
+              <span className="hero-btn__icon" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M3.5 8h9M9 4.5 12.5 8 9 11.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </span>
+            </TransitionLink>
+            <a href="#realisations" className="hero-btn hero-btn--secondary">
+              <span className="hero-btn__label">Nos réalisations</span>
+            </a>
+          </div>
+          <div className="hero-reassurance-block">
+            <p className="hero-reassurance">
+              <span>Réponse sous 24h</span>
+              <span className="hero-reassurance__sep" aria-hidden="true">
+                ·
+              </span>
+              Sans engagement
+              <span className="hero-reassurance__sep" aria-hidden="true">
+                ·
+              </span>
+              Devis détaillé
+            </p>
+            <HeroSocialLinks />
+          </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </section>
+
+    <RealisationsSection />
+
+    <ServicesSection />
+
+    <CtaSection />
+
+    <AboutSection />
+
+    <FaqSection />
+
+    <Footer />
+      </HomePageShell>
+    </>
+    </IntroProvider>
   );
 }
