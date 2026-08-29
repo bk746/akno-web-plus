@@ -4088,30 +4088,101 @@ html.intro-complete .hero-orb-enter {
 }
 
 @media (max-width: 768px) {
+  .site-intro__inner {
+    height: 100%;
+    min-height: 100dvh;
+    padding-inline: max(1.5rem, env(safe-area-inset-left, 0px))
+      max(1.5rem, env(safe-area-inset-right, 0px));
+    padding-block: max(1.5rem, env(safe-area-inset-top, 0px))
+      max(1.5rem, env(safe-area-inset-bottom, 0px));
+  }
+
   .site-intro__cluster {
-    width: min(92vw, 360px);
-    height: min(78vw, 320px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 20rem;
+    height: auto;
   }
 
-  .site-intro__copy--left {
-    left: 0;
-    bottom: 22%;
-    max-width: 9.5rem;
-    font-size: 0.75rem;
-  }
-
-  .site-intro__brand {
-    right: 0;
-    top: 8%;
-  }
-
-  .site-intro__brand-logo {
-    height: 36px;
+  .site-intro__orb-wrap {
+    position: relative;
+    inset: auto;
+    order: 1;
+    flex: 0 0 auto;
   }
 
   .site-intro__orb {
-    width: min(62vw, 240px);
-    height: min(62vw, 240px);
+    width: min(48vw, 11.5rem);
+    height: min(48vw, 11.5rem);
+  }
+
+  .site-intro__brand {
+    position: relative;
+    right: auto;
+    top: auto;
+    order: 2;
+    z-index: 2;
+  }
+
+  .site-intro__brand-logo {
+    height: clamp(2.125rem, 7.5vw, 2.625rem);
+  }
+
+  .site-intro__copy--left {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    order: 3;
+    z-index: 2;
+    align-items: center;
+    max-width: none;
+    font-size: 0.6875rem;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .site-intro__copy-block--right {
+    align-self: center;
+    text-align: center;
+  }
+
+  .site-intro__copy--left.is-entering {
+    animation: intro-mobile-fade-up 0.85s cubic-bezier(0.76, 0, 0.24, 1) 0.45s both;
+  }
+
+  .site-intro__copy--left.is-exiting {
+    animation: intro-mobile-fade-out 0.75s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  }
+
+  .site-intro__brand.is-entering {
+    animation: intro-mobile-fade-up 0.85s cubic-bezier(0.76, 0, 0.24, 1) 0.35s both;
+  }
+
+  .site-intro__brand.is-exiting {
+    animation: intro-mobile-fade-out 0.75s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+  }
+}
+
+@keyframes intro-mobile-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes intro-mobile-fade-out {
+  to {
+    opacity: 0;
+    transform: translate3d(0, -10px, 0);
   }
 }
 
