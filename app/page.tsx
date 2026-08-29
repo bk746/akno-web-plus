@@ -25,6 +25,11 @@ export default function Home() {
   return (
     <IntroProvider>
     <>
+      <div className="site-intro-curtain" aria-hidden="true" />
+
+      <SiteIntro />
+
+      <div className="site-shell">
       <Image
         src={line2}
         alt=""
@@ -36,7 +41,6 @@ export default function Home() {
         sizes="100vw"
       />
 
-      <SiteIntro />
       <SiteNav />
 
       <HomePageShell>
@@ -152,6 +156,7 @@ export default function Home() {
 
     <Footer />
       </HomePageShell>
+      </div>
     </>
     </IntroProvider>
   );

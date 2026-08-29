@@ -3510,6 +3510,27 @@ html {
 
 /* ── Site intro ── */
 
+.site-intro-curtain {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  pointer-events: none;
+}
+
+html:not(.intro-complete) .site-intro-curtain {
+  display: block;
+}
+
+.site-shell {
+  visibility: hidden;
+}
+
+html.intro-complete .site-shell {
+  visibility: visible;
+}
+
 html.intro-pending .hero-enter,
 html.intro-pending .hero-line-enter,
 html.intro-pending .hero-orb-enter {
@@ -3519,7 +3540,7 @@ html.intro-pending .hero-orb-enter {
 
 html.intro-pending .hero-header-enter {
   animation: none !important;
-  opacity: 1;
+  opacity: 0 !important;
   transform: none;
 }
 

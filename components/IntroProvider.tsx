@@ -31,16 +31,19 @@ export function IntroProvider({ children }: { children: ReactNode }) {
   const [introActive, setIntroActive] = useState(true);
   const [introComplete, setIntroComplete] = useState(false);
 
+  const skipIntro = useCallback(() => {
+    document.documentElement.classList.remove("intro-pending");
+    document.documentElement.classList.add("intro-complete");
+    setIntroActive(false);
+    setIntroComplete(true);
+  }, []);
+
   const completeIntro = useCallback(() => {
     setIntroActive(false);
     setIntroComplete(true);
     document.documentElement.classList.remove("intro-pending");
     document.documentElement.classList.add("intro-complete");
   }, []);
-
-  const skipIntro = useCallback(() => {
-    completeIntro();
-  }, [completeIntro]);
 
   const value = useMemo(
     () => ({
