@@ -39,20 +39,30 @@ export function RealisationsSection() {
   const activeProject = activeIndex !== null ? realisations[activeIndex] : null;
 
   useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 768px)");
+
+    const applyMobileLayout = () => {
+      rowRefs.current.forEach((row) => {
+        if (!row) return;
+        row.style.setProperty("--media-width", "100%");
+        row.style.setProperty("--media-shift", "0px");
+      });
+    };
+
+    if (mobileQuery.matches) {
+      applyMobileLayout();
+      const onResize = () => {
+        if (mobileQuery.matches) applyMobileLayout();
+      };
+      window.addEventListener("resize", onResize, { passive: true });
+      return () => window.removeEventListener("resize", onResize);
+    }
+
     let ticking = false;
 
     const updateWidths = () => {
-      const isMobile = window.matchMedia("(max-width: 768px)").matches;
-
       rowRefs.current.forEach((row) => {
         if (!row) return;
-
-        if (isMobile) {
-          row.style.setProperty("--media-width", "100%");
-          row.style.setProperty("--media-shift", "0px");
-          return;
-        }
-
         row.style.setProperty("--media-width", `${computeMediaWidth(row)}%`);
         row.style.setProperty("--media-shift", `${computeMediaShift(row).toFixed(2)}px`);
       });
@@ -126,10 +136,10 @@ export function RealisationsSection() {
               aria-label={`Voir le projet ${project.name}`}
               onClick={() => openProject(index)}
             >
-              <div className="project-row__media-inner">
+              <span className="project-row__media-inner">
                 <Image
                   src={project.image}
-                  alt={`Aperçu du projet ${project.name}`}
+                  alt=""
                   width={project.image.width}
                   height={project.image.height}
                   draggable={false}
@@ -138,7 +148,7 @@ export function RealisationsSection() {
                   loading={index === 0 ? "eager" : "lazy"}
                   sizes="(max-width: 768px) 90vw, 55vw"
                 />
-              </div>
+              </span>
             </button>
 
             <Reveal

@@ -68,7 +68,7 @@ export function Footer() {
             </div>
           </Reveal>
 
-          <Reveal className="site-footer__col" y={28} delay={0.14}>
+          <Reveal className="site-footer__col site-footer__col--studio" y={28} delay={0.14}>
             <p className="site-footer__col-label">Studio</p>
             <div className="site-footer__studio">
               <p>

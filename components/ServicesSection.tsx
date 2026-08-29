@@ -24,14 +24,69 @@ function isMobileViewport() {
 
 export function ServicesSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const targetIndexRef = useRef(0);
   const currentIndexRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
+  const activeSlideRef = useRef(0);
   const maxIndex = Math.max(0, services.length - VISIBLE_CARDS);
   const scrollHeightVh = 100 + (maxIndex + 1) * SCROLL_STEP_VH;
+
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    let frame = 0;
+
+    const updateActiveSlide = () => {
+      if (!isMobileViewport()) return;
+
+      if (frame) return;
+      frame = window.requestAnimationFrame(() => {
+        frame = 0;
+
+        const cards = carousel.querySelectorAll<HTMLElement>(".service-card");
+        if (!cards.length) return;
+
+        const carouselRect = carousel.getBoundingClientRect();
+        const carouselCenter = carouselRect.left + carouselRect.width / 2;
+
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
+
+        cards.forEach((card, index) => {
+          const cardRect = card.getBoundingClientRect();
+          const cardCenter = cardRect.left + cardRect.width / 2;
+          const distance = Math.abs(cardCenter - carouselCenter);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+        if (closestIndex !== activeSlideRef.current) {
+          activeSlideRef.current = closestIndex;
+          setActiveSlide(closestIndex);
+        }
+      });
+    };
+
+    carousel.addEventListener("scroll", updateActiveSlide, { passive: true });
+    window.addEventListener("resize", updateActiveSlide);
+
+    updateActiveSlide();
+
+    return () => {
+      carousel.removeEventListener("scroll", updateActiveSlide);
+      window.removeEventListener("resize", updateActiveSlide);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   useEffect(() => {
     const container = scrollRef.current;
@@ -75,11 +130,19 @@ export function ServicesSection() {
 
       currentIndexRef.current = next;
       applySlideIndex(next);
-      rafRef.current = requestAnimationFrame(animate);
+
+      if (Math.abs(target - next) > 0.001) {
+        rafRef.current = requestAnimationFrame(animate);
+      } else {
+        rafRef.current = null;
+      }
     };
 
     const onScroll = () => {
       updateTargetFromScroll();
+      if (!isMobileViewport() && rafRef.current === null) {
+        rafRef.current = requestAnimationFrame(animate);
+      }
     };
 
     const startCarousel = () => {
@@ -92,7 +155,10 @@ export function ServicesSection() {
       currentIndexRef.current = targetIndexRef.current;
       applySlideIndex(currentIndexRef.current);
 
-      if (rafRef.current === null) {
+      if (
+        rafRef.current === null &&
+        Math.abs(targetIndexRef.current - currentIndexRef.current) > 0.001
+      ) {
         rafRef.current = requestAnimationFrame(animate);
       }
     };
@@ -136,52 +202,56 @@ export function ServicesSection() {
           </Reveal>
 
           <div className="services__layout">
-            <div className="services__carousel-shell">
-              <div
-                ref={trackRef}
-                className="services__track"
-                style={{ "--slide-index": 0 } as React.CSSProperties}
-              >
-                {services.map((service, index) => (
-                  <article
-                    key={service.id}
-                    className="service-card"
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`Ouvrir ${service.title}`}
-                    onMouseEnter={() => setHoveredIndex(index)}
-                    onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={() => openService(index)}
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter" || event.key === " ") {
-                        event.preventDefault();
-                        openService(index);
-                      }
-                    }}
-                  >
-                    <Image
-                      src={service.image}
-                      alt=""
-                      width={service.image.width}
-                      height={service.image.height}
-                      draggable={false}
-                      className="service-card__image"
-                      loading="lazy"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="service-card__header">
-                      <span className="service-card__chevron" aria-hidden="true">
-                        ⌄
+            <div className="services__carousel-wrap">
+              <div ref={carouselRef} className="services__carousel-shell">
+                <div
+                  ref={trackRef}
+                  className="services__track"
+                  style={{ "--slide-index": 0 } as React.CSSProperties}
+                >
+                  {services.map((service, index) => (
+                    <button
+                      key={service.id}
+                      type="button"
+                      className="service-card"
+                      aria-label={`Ouvrir ${service.title}`}
+                      onMouseEnter={() => setHoveredIndex(index)}
+                      onMouseLeave={() => setHoveredIndex(null)}
+                      onClick={() => openService(index)}
+                    >
+                      <Image
+                        src={service.image}
+                        alt=""
+                        width={service.image.width}
+                        height={service.image.height}
+                        draggable={false}
+                        className="service-card__image"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 85vw, 33vw"
+                      />
+                      <span className="service-card__header">
+                        <span className="service-card__chevron" aria-hidden="true">
+                          ⌄
+                        </span>
+                        <span className="service-card__title" aria-hidden="true">
+                          <AnimatedText
+                            text={service.title}
+                            externalHover={hoveredIndex === index}
+                            decorative
+                          />
+                        </span>
                       </span>
-                      <h3 className="service-card__title">
-                        <span className="sr-only">{service.title}</span>
-                        <AnimatedText
-                          text={service.title}
-                          externalHover={hoveredIndex === index}
-                        />
-                      </h3>
-                    </div>
-                  </article>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="services__slider-dots" aria-hidden="true">
+                {services.map((service, index) => (
+                  <span
+                    key={service.id}
+                    className={`services__slider-dot ${activeSlide === index ? "is-active" : ""}`}
+                  />
                 ))}
               </div>
             </div>

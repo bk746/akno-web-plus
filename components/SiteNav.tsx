@@ -15,11 +15,8 @@ const menuLinks = [
   { label: "Contact", href: "/contacts" },
 ];
 
-const SCROLL_THRESHOLD = 64;
-
 export function SiteNav() {
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const { introComplete } = useIntro();
 
   useEffect(() => {
@@ -29,32 +26,10 @@ export function SiteNav() {
     };
   }, [open]);
 
-  useEffect(() => {
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
-      setScrolled(window.scrollY > SCROLL_THRESHOLD);
-    };
-
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
-
   return (
     <>
       <header
-        className={`site-nav hero-header-enter ${scrolled ? "site-nav--scrolled" : ""} ${introComplete ? "site-nav--intro-ready" : "site-nav--intro-pending"}`}
+        className={`site-nav hero-header-enter ${introComplete ? "site-nav--intro-ready" : "site-nav--intro-pending"}`}
       >
         <a href="/" className="site-nav__logo" aria-label="Retour à l'accueil">
           <Image
@@ -97,14 +72,16 @@ export function SiteNav() {
       <div
         className={`menu-overlay ${open ? "menu-overlay--open" : ""}`}
         aria-hidden={!open}
+        inert={!open}
       >
-        <nav className="menu-overlay__nav">
+        <nav className="menu-overlay__nav" aria-label="Menu principal">
           {menuLinks.map((link, index) => (
             <TransitionLink
               key={link.href}
               href={link.href}
               className="menu-overlay__link"
               style={{ transitionDelay: open ? `${120 + index * 60}ms` : "0ms" }}
+              tabIndex={open ? undefined : -1}
               onClick={() => setOpen(false)}
             >
               {link.label}

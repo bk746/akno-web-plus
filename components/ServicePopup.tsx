@@ -97,6 +97,9 @@ export function ServicePopup({ isOpen, onClose, service }: ServicePopupProps) {
         ? `/contacts?service=${encodeURIComponent(activeService.id)}`
         : "/contacts";
 
+  const offerTabId = (offerId: string) => `service-offer-tab-${activeService.id}-${offerId}`;
+  const offerPanelId = (offerId: string) => `service-offer-panel-${activeService.id}-${offerId}`;
+
   return createPortal(
     <>
       <button
@@ -160,30 +163,44 @@ export function ServicePopup({ isOpen, onClose, service }: ServicePopupProps) {
                   role="tablist"
                   aria-label="Offres disponibles"
                 >
-                  {activeService.offers?.map((offer) => (
+                  {activeService.offers?.map((offer) => {
+                    const isSelected = selectedOfferId === offer.id;
+
+                    return (
                     <button
                       key={offer.id}
                       type="button"
+                      id={offerTabId(offer.id)}
                       role="tab"
-                      aria-selected={selectedOfferId === offer.id}
-                      className={`service-popup__offer-tab ${selectedOfferId === offer.id ? "is-active" : ""}`}
+                      aria-selected={isSelected}
+                      aria-controls={offerPanelId(offer.id)}
+                      tabIndex={isSelected ? 0 : -1}
+                      className={`service-popup__offer-tab ${isSelected ? "is-active" : ""}`}
                       onClick={() => setSelectedOfferId(offer.id)}
                     >
                       {offer.name}
                     </button>
-                  ))}
+                    );
+                  })}
                 </div>
 
-                {selectedOffer ? (
+                {activeService.offers?.map((offer) => {
+                  const isSelected = selectedOfferId === offer.id;
+
+                  return (
                   <div
-                    key={selectedOffer.id}
-                    className={`service-popup__offer-panel ${animated ? "service-popup__offer-panel--open" : ""}`}
+                    key={offer.id}
+                    id={offerPanelId(offer.id)}
                     role="tabpanel"
+                    aria-labelledby={offerTabId(offer.id)}
+                    hidden={!isSelected}
+                    className={`service-popup__offer-panel ${animated && isSelected ? "service-popup__offer-panel--open" : ""}`}
                   >
-                    <p className="service-popup__offer-panel-price">{selectedOffer.price}</p>
-                    <p className="service-popup__offer-panel-desc">{selectedOffer.description}</p>
+                    <p className="service-popup__offer-panel-price">{offer.price}</p>
+                    <p className="service-popup__offer-panel-desc">{offer.description}</p>
                   </div>
-                ) : null}
+                  );
+                })}
 
                 <p
                   className={`service-popup__paragraph service-popup__paragraph--compact service-popup__reveal ${animated ? "service-popup__reveal--open" : ""}`}

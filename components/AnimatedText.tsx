@@ -6,23 +6,25 @@ type AnimatedTextProps = {
   text: string;
   className?: string;
   externalHover?: boolean;
+  decorative?: boolean;
 };
 
 export function AnimatedText({
   text,
   className = "",
   externalHover,
+  decorative = false,
 }: AnimatedTextProps) {
   const [hovered, setHovered] = useState(false);
   const isHovered = externalHover ?? hovered;
   const characters = text.split("");
 
   return (
-    <div
+    <span
       className={`animated-text ${className}`.trim()}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      aria-hidden={externalHover !== undefined}
+      aria-hidden={decorative ? true : undefined}
     >
       {characters.map((character, index) => (
         <span key={`${character}-${index}`} className="animated-text__char">
@@ -48,6 +50,6 @@ export function AnimatedText({
           </span>
         </span>
       ))}
-    </div>
+    </span>
   );
 }

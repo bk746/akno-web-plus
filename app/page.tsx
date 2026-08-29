@@ -46,17 +46,17 @@ export default function Home() {
       <HomePageShell>
       <section className="hero-section relative w-full overflow-hidden">
 
-      <div className="hero-orbs select-none">
+      <div className="hero-orbs select-none" aria-hidden="true">
         <EclypseOrb
           variant="hero"
-          className="hero-orb-enter absolute right-[60%] top-[7%] w-[min(17vw,240px)] max-md:right-[45%] max-md:top-[4%] max-md:w-[min(28vw,180px)]"
+          className="hero-orb-enter hero-orb--accent absolute right-[60%] top-[7%] w-[min(17vw,240px)]"
           enterDelay="0.35s"
           animationDelay="-2.5s"
         />
 
         <EclypseOrb
           variant="hero"
-          className="hero-orb-enter absolute right-[2%] top-1/2 w-[min(44vw,580px)] -translate-y-[48%] max-md:right-[-8%] max-md:w-[min(72vw,420px)]"
+          className="hero-orb-enter hero-orb--main absolute right-[2%] top-1/2 w-[min(44vw,580px)] -translate-y-[48%]"
           enterDelay="0.1s"
           animationDelay="0s"
         />
@@ -83,25 +83,33 @@ export default function Home() {
       </div>
 
       <div className="hero-content">
-        <h1 className="hero-title">
-          <span className="hero-title-line hero-enter" style={{ "--hero-delay": "0.12s" } as React.CSSProperties}>
-            Votre marque mérite une
-          </span>
-          <span
-            className="hero-title-line text-gradient hero-enter"
-            style={{ "--hero-delay": "0.22s" } as React.CSSProperties}
-          >
-            expérience sur mesure.
-          </span>
-        </h1>
+        <div className="hero-copy">
+          <h1 className="hero-title">
+            <span className="hero-title-line hero-enter" style={{ "--hero-delay": "0.12s" } as React.CSSProperties}>
+              Votre marque mérite
+            </span>
+            <span
+              className="hero-title-line text-gradient hero-enter"
+              style={{ "--hero-delay": "0.18s" } as React.CSSProperties}
+            >
+              une expérience
+            </span>
+            <span
+              className="hero-title-line text-gradient hero-enter"
+              style={{ "--hero-delay": "0.24s" } as React.CSSProperties}
+            >
+              sur mesure.
+            </span>
+          </h1>
 
-        <p
-          className="hero-subtitle mt-[1.375rem] hero-enter"
-          style={{ "--hero-delay": "0.34s" } as React.CSSProperties}
-        >
-          AKNO conçoit sites et produits digitaux pour les marques qui veulent
-          se démarquer — du design au lancement.
-        </p>
+          <p
+            className="hero-subtitle hero-enter"
+            style={{ "--hero-delay": "0.34s" } as React.CSSProperties}
+          >
+            AKNO conçoit sites et produits digitaux pour les marques qui veulent
+            se démarquer — du design au lancement.
+          </p>
+        </div>
 
         <div
           className="hero-cta hero-enter"
@@ -128,15 +136,14 @@ export default function Home() {
           </div>
           <div className="hero-reassurance-block">
             <p className="hero-reassurance">
-              <span>Réponse sous 24h</span>
-              <span className="hero-reassurance__sep" aria-hidden="true">
-                ·
+              <span className="hero-reassurance__lead">Réponse sous 24h</span>
+              <span className="hero-reassurance__meta">
+                <span>Sans engagement</span>
+                <span className="hero-reassurance__sep" aria-hidden="true">
+                  ·
+                </span>
+                <span>Devis détaillé</span>
               </span>
-              Sans engagement
-              <span className="hero-reassurance__sep" aria-hidden="true">
-                ·
-              </span>
-              Devis détaillé
             </p>
             <HeroSocialLinks />
           </div>

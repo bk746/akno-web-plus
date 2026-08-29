@@ -63,7 +63,7 @@ export function SiteIntro() {
   return (
     <div
       className={`site-intro ${exiting ? "site-intro--exit" : ""}`}
-      aria-hidden="true"
+      role="presentation"
     >
       <div className="site-intro__inner">
         <div className="site-intro__cluster">
@@ -96,7 +96,7 @@ export function SiteIntro() {
           >
             <Image
               src={logoAkno}
-              alt="AKNO"
+              alt=""
               width={206}
               height={78}
               draggable={false}

@@ -5,7 +5,6 @@ import line2 from "@/src/images/line2.png";
 import { EclypseOrb } from "@/components/EclypseOrb";
 import { SiteNav } from "@/components/SiteNav";
 import { PageEnter } from "@/components/PageEnter";
-import { ContactChannels } from "@/components/ContactChannels";
 import { ContactClock } from "@/components/ContactClock";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
@@ -69,7 +68,6 @@ export default function ContactsPage() {
                   </div>
                 </div>
                 <p className="contact-page__hours-note">Du lundi au vendredi · heure de Paris</p>
-                <ContactChannels className="contact-page__channels" />
               </Reveal>
 
               <Reveal className="contact-page__clock-wrap" y={28} delay={0.08}>

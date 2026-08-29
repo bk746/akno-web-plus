@@ -36,6 +36,8 @@ export function FaqSection() {
         <div className="faq__list">
           {faqItems.map((item, index) => {
             const isOpen = openId === item.id;
+            const triggerId = `faq-trigger-${item.id}`;
+            const panelId = `faq-panel-${item.id}`;
 
             return (
               <Reveal
@@ -48,8 +50,10 @@ export function FaqSection() {
               >
                 <button
                   type="button"
+                  id={triggerId}
                   className="faq-item__trigger"
                   aria-expanded={isOpen}
+                  aria-controls={panelId}
                   onClick={() => setOpenId(isOpen ? null : item.id)}
                 >
                   <span className="faq-item__question">{item.question}</span>
@@ -57,6 +61,10 @@ export function FaqSection() {
                 </button>
 
                 <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={triggerId}
+                  aria-hidden={!isOpen}
                   className={`faq-item__panel ${isOpen ? "faq-item__panel--open" : ""}`}
                 >
                   <div className="faq-item__panel-inner">
