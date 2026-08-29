@@ -29,6 +29,8 @@ export default function Home() {
 
       <SiteIntro />
 
+      <SiteNav />
+
       <div className="site-shell">
       <Image
         src={line2}
@@ -40,8 +42,6 @@ export default function Home() {
         priority
         sizes="100vw"
       />
-
-      <SiteNav />
 
       <HomePageShell>
       <section className="hero-section relative w-full overflow-hidden">

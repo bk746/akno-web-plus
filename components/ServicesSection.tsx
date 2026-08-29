@@ -89,6 +89,8 @@ export function ServicesSection() {
   }, []);
 
   useEffect(() => {
+    if (isMobileViewport()) return;
+
     const container = scrollRef.current;
     const track = trackRef.current;
     if (!container || !track) return;
