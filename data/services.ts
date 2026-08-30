@@ -48,32 +48,25 @@ export const services: Service[] = [
     points: [],
     offers: [
       {
-        id: "audit-ux",
-        name: "Audit UX",
-        price: "à partir de 490 €",
-        description:
-          "Analyse de votre interface existante, parcours utilisateur et points de friction. Recommandations concrètes pour améliorer l'expérience, la clarté et le taux de conversion — sans refonte complète.",
-      },
-      {
         id: "maquettes",
         name: "Maquettes UI",
-        price: "à partir de 790 €",
+        price: "990 €",
         description:
-          "Wireframes et écrans finaux pour vos pages clés. Design responsive, hiérarchie visuelle claire et composants réutilisables — prêts à être intégrés par votre équipe ou la nôtre.",
+          "Jusqu'à 5 écrans clés en desktop et mobile : wireframes et interfaces finales livrées sur Figma, prêtes à intégrer. Une base visuelle claire pour lancer le développement sans repartir de zéro.",
       },
       {
         id: "design-system",
         name: "Design system",
-        price: "à partir de 1 490 €",
+        price: "1 990 €",
         description:
-          "Bibliothèque de composants, tokens couleur/typo et guidelines d'usage. Une base cohérente pour faire évoluer votre produit ou votre site sans perdre en qualité visuelle.",
+          "Bibliothèque de composants, tokens couleur et typographie, plus guidelines d'usage. Une base cohérente pour faire évoluer votre site ou produit sans perdre en qualité visuelle.",
       },
       {
         id: "ux-ui-complet",
         name: "UX/UI complet",
-        price: "à partir de 2 490 €",
+        price: "2 990 € – 3 990 €",
         description:
-          "Recherche utilisateur, parcours, prototypes interactifs et interfaces finales. De la stratégie à la livraison dev-ready — pour un site ou une app pensé pour convertir.",
+          "De la recherche au handoff dev : parcours utilisateur, wireframes, prototypes et interfaces finales. Livrable complet pour un site vitrine ou un produit digital pensé pour convertir.",
       },
     ],
   },
@@ -94,44 +87,37 @@ export const services: Service[] = [
     points: [],
     offers: [
       {
-        id: "portfolio",
-        name: "Portfolio",
-        price: "à partir de 890 €",
+        id: "template",
+        name: "Template AKNO",
+        price: "499 €",
         description:
-          "Site pensé pour mettre en valeur votre travail : projets, case studies, galeries et biographie. Idéal pour créatifs, photographes, architectes ou freelances qui veulent une vitrine élégante et crédible.",
+          "Un site professionnel livré rapidement à partir de notre base AKNO : structure optimisée, design soigné, personnalisation de votre identité (logo, couleurs, textes) et mise en ligne incluse. Idéal pour démarrer vite avec un rendu premium, sans budget sur-mesure.",
       },
       {
-        id: "pret-a-lemploi",
-        name: "Site prêt à l'emploi",
-        price: "à partir de 690 €",
+        id: "sur-mesure",
+        name: "Site web personnalisé",
+        price: "3 500 € – 5 000 €",
         description:
-          "Une base solide, personnalisée à votre image et livrée rapidement. Structure clé en main, contenus adaptés, mise en ligne incluse — parfait pour démarrer vite sans compromis sur la qualité.",
-      },
-      {
-        id: "vitrine",
-        name: "Site vitrine",
-        price: "à partir de 1 890 €",
-        description:
-          "Présentation claire de votre activité, vos services et votre expertise. Pages sur mesure, formulaire de contact, SEO de base et design aligné sur votre marque — pour rassurer et convertir vos visiteurs.",
+          "Conception et développement sur mesure, pensés pour votre marque et vos objectifs business. Design unique, parcours utilisateur optimisé, animations, SEO de base et performance — pour une vitrine digitale qui se démarque vraiment.",
       },
       {
         id: "ecommerce",
-        name: "Site e-commerce",
-        price: "à partir de 3 490 €",
+        name: "E-commerce",
+        price: "Sur devis",
         description:
-          "Boutique en ligne complète : catalogue produits, panier, paiement sécurisé et gestion des commandes. UX d'achat optimisée, responsive et performante — pour vendre en ligne sereinement.",
+          "Boutique en ligne adaptée à votre catalogue, vos flux et vos ambitions : catalogue produits, panier, paiement sécurisé, gestion des commandes et UX d'achat optimisée. Chiffrage personnalisé selon le volume, les intégrations et le niveau de customisation.",
       },
     ],
   },
   {
     id: "ecommerce",
     title: "Direction artistique",
-    image: card3,
+    image: card4,
     theme: {
-      from: "#4f5d52",
-      to: "#8f9f8a",
-      glowA: "#b8c4b0",
-      glowB: "#2f3832",
+      from: "#5a48c8",
+      to: "#9b8cf0",
+      glowA: "#5ae3ed",
+      glowB: "#3a2f80",
     },
     subtitle:
       "Une vision créative cohérente qui unit storytelling, design et identité de marque.",
@@ -140,23 +126,9 @@ export const services: Service[] = [
     points: [],
     offers: [
       {
-        id: "direction-ponctuelle",
-        name: "Direction ponctuelle",
-        price: "à partir de 590 €",
-        description:
-          "Brief créatif, axes visuels et recommandations pour un projet ou une campagne. Idéal pour cadrer une direction avant production — site, lancement produit ou contenu social.",
-      },
-      {
-        id: "moodboards",
-        name: "Moodboards & concepts",
-        price: "à partir de 890 €",
-        description:
-          "Exploration visuelle : palettes, typographies, références photo et moodboards. Plusieurs pistes créatives pour valider l'univers de votre marque avant de passer à la production.",
-      },
-      {
         id: "shooting-assets",
         name: "Shooting & assets",
-        price: "à partir de 1 290 €",
+        price: "500 €",
         description:
           "Direction de shooting, sélection visuelle et déclinaison d'assets pour web et réseaux. Images, visuels hero et contenus prêts à intégrer dans vos supports digitaux.",
       },
@@ -170,48 +142,41 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "branding",
-    title: "Branding digital",
-    image: card4,
+    id: "accompagnement",
+    title: "Accompagnement",
+    image: card3,
     theme: {
-      from: "#5a48c8",
-      to: "#9b8cf0",
-      glowA: "#5ae3ed",
-      glowB: "#3a2f80",
+      from: "#4f5d52",
+      to: "#8f9f8a",
+      glowA: "#b8c4b0",
+      glowB: "#2f3832",
     },
     subtitle:
-      "Des identités fortes qui se démarquent et inspirent confiance en ligne.",
+      "Votre site reste à jour, sécurisé et performant — sans y penser.",
     paragraph:
-      "Logo, tonalité, univers visuel : nous construisons des marques mémorables adaptées aux codes du digital.",
+      "Un abonnement mensuel pour la maintenance, les mises à jour et les ajustements de contenu. Vous vous concentrez sur votre business, on s'occupe du reste.",
     points: [],
     offers: [
       {
-        id: "logo",
-        name: "Logo",
-        price: "à partir de 490 €",
+        id: "basique",
+        name: "Basique",
+        price: "49 € / mois",
         description:
-          "Création de logo sur mesure avec plusieurs propositions et déclinaisons (couleur, monochrome, favicon). Un symbole fort, lisible en petit format et adapté au digital.",
+          "Maintenance technique, mises à jour de sécurité, sauvegarde mensuelle et jusqu'à 2 modifications de texte par mois (titres, descriptions, coordonnées). Support par email sous 72 h.",
       },
       {
-        id: "identite",
-        name: "Identité visuelle",
-        price: "à partir de 990 €",
+        id: "confort",
+        name: "Confort",
+        price: "89 € / mois",
         description:
-          "Logo, palette couleur, typographies et univers graphique. Les fondations de votre marque en ligne — cohérentes, mémorables et prêtes à décliner sur vos supports.",
+          "Tout le Basique, plus jusqu'à 5 modifications de contenu par mois (textes, images, liens), ajustements visuels légers et support prioritaire sous 48 h. Rapport de performance trimestriel.",
       },
       {
-        id: "charte",
-        name: "Charte graphique",
-        price: "à partir de 1 690 €",
+        id: "premium",
+        name: "Premium",
+        price: "149 € / mois",
         description:
-          "Identité complète + règles d'usage, templates réseaux sociaux et éléments de communication. Tout ce qu'il faut pour que votre marque reste homogène partout.",
-      },
-      {
-        id: "brand-book",
-        name: "Brand book",
-        price: "à partir de 2 490 €",
-        description:
-          "Documentation complète de votre marque : logo, tonalité, visuels, do's & don'ts et templates. La référence pour votre équipe, vos prestataires et vos futurs projets.",
+          "Tout le Confort, plus modifications de contenu illimitées (dans la limite du raisonnable), ajout de sections ou pages simples, suivi SEO light et 1 call mensuel de 30 min. Support sous 24 h.",
       },
     ],
   },
@@ -226,38 +191,31 @@ export const services: Service[] = [
       glowB: "#064e47",
     },
     subtitle:
-      "Visibilité, vitesse et conversion — optimisés pour durer.",
+      "Un coup d'accélérateur pour être trouvé et charger vite — le suivi, c'est l'Accompagnement.",
     paragraph:
-      "Audit, structure technique et contenu : nous optimisons votre présence pour être trouvé, rapide et efficace.",
+      "Ces offres courent sur des missions ponctuelles : lancement, refonte ou optimisation ciblée. Pour la maintenance, les mises à jour et le suivi dans la durée, voir nos formules Accompagnement (Basique, Confort, Premium).",
     points: [],
     offers: [
       {
-        id: "audit-seo",
-        name: "Audit SEO",
-        price: "à partir de 390 €",
-        description:
-          "Analyse technique, structure, contenu et concurrence. Rapport détaillé avec priorités d'action pour améliorer votre visibilité sur Google — sans engagement long terme.",
-      },
-      {
         id: "performance",
         name: "Performance web",
-        price: "à partir de 590 €",
+        price: "690 €",
         description:
-          "Optimisation vitesse de chargement, Core Web Vitals et bonnes pratiques techniques. Un site plus rapide = meilleure expérience, meilleur référencement et plus de conversions.",
+          "Optimisation one-shot : vitesse de chargement, Core Web Vitals, images et bonnes pratiques techniques. Idéal au lancement ou après une refonte. Déjà inclus dans Accompagnement : maintenance technique (Basique+) et rapport de performance trimestriel (Confort+).",
       },
       {
-        id: "seo-contenu",
-        name: "SEO & contenu",
-        price: "à partir de 890 €",
+        id: "seo-setup",
+        name: "SEO setup",
+        price: "990 €",
         description:
-          "Structure sémantique, balises, maillage interne et recommandations éditoriales. On aligne votre contenu sur ce que vos clients recherchent réellement.",
+          "Mise en place SEO on-page : balises, structure sémantique, maillage interne, sitemap et recommandations éditoriales pour vos pages clés. Déjà inclus dans Accompagnement : modifications de contenu régulières (Confort+) et suivi SEO light (Premium).",
       },
       {
-        id: "pack-complet",
-        name: "Pack complet",
-        price: "à partir de 1 890 €",
+        id: "pack-visibilite",
+        name: "Pack visibilité",
+        price: "1 990 €",
         description:
-          "Audit SEO, optimisations techniques, performance et suivi analytics. Un accompagnement global pour être trouvé, rapide et mesurer ce qui fonctionne vraiment.",
+          "Performance + SEO setup + configuration analytics en une seule mission. Le meilleur point de départ pour un site neuf ou une refonte complète. Le suivi mensuel, les modifs courantes et le monitoring continu → formules Accompagnement.",
       },
     ],
   },

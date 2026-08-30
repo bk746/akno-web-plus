@@ -15,7 +15,7 @@ export const faqItems: FaqItem[] = [
     id: "services",
     question: "Quels services propose AKNO ?",
     answer:
-      "UX/UI design, développement web, direction artistique, branding digital et optimisation SEO & performance. Nous accompagnons votre projet de A à Z ou sur des missions ciblées.",
+      "UX/UI design, développement web, direction artistique, accompagnement mensuel et optimisation SEO & performance. Nous accompagnons votre projet de A à Z ou sur des missions ciblées.",
   },
   {
     id: "process",
