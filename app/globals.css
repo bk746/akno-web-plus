@@ -98,29 +98,6 @@ html {
     #000;
 }
 
-.hero-frame__grid {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  border-inline: 1px solid rgba(255, 255, 255, 0.1);
-  background:
-    linear-gradient(
-      to right,
-      transparent calc(25% - 0.5px),
-      rgba(255, 255, 255, 0.12) calc(25% - 0.5px),
-      rgba(255, 255, 255, 0.12) calc(25% + 0.5px),
-      transparent calc(25% + 0.5px)
-    ),
-    linear-gradient(
-      to right,
-      transparent calc(75% - 0.5px),
-      rgba(255, 255, 255, 0.12) calc(75% - 0.5px),
-      rgba(255, 255, 255, 0.12) calc(75% + 0.5px),
-      transparent calc(75% + 0.5px)
-    );
-}
-
 .hero-frame__orb {
   position: absolute;
   z-index: 2;
@@ -1564,19 +1541,37 @@ html {
   }
 }
 
-.site-grid {
+.site-frame-grid,
+.hero-frame__grid {
   pointer-events: none;
+  border-inline: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(
+      to right,
+      transparent calc(25% - 0.5px),
+      rgba(255, 255, 255, 0.12) calc(25% - 0.5px),
+      rgba(255, 255, 255, 0.12) calc(25% + 0.5px),
+      transparent calc(25% + 0.5px)
+    ),
+    linear-gradient(
+      to right,
+      transparent calc(75% - 0.5px),
+      rgba(255, 255, 255, 0.12) calc(75% - 0.5px),
+      rgba(255, 255, 255, 0.12) calc(75% + 0.5px),
+      transparent calc(75% + 0.5px)
+    );
+}
+
+.hero-frame__grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.site-frame-grid {
   position: fixed;
   inset: 0;
   z-index: 1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  user-select: none;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
 }
 
 .page-content {
@@ -4674,7 +4669,7 @@ html.intro-complete .hero-orb-enter {
     max-width: 100%;
   }
 
-  .site-grid {
+  .site-frame-grid {
     display: none;
   }
 

@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import line2 from "@/src/images/line2.png";
 import { Footer } from "@/components/Footer";
 import { PageEnter } from "@/components/PageEnter";
 import { Reveal } from "@/components/Reveal";
@@ -21,17 +19,6 @@ export default function MentionsLegalesPage() {
 
   return (
     <>
-      <Image
-        src={line2}
-        alt=""
-        width={1835}
-        height={1964}
-        draggable={false}
-        className="site-grid"
-        priority
-        sizes="100vw"
-      />
-
       <PageEnter>
         <main className="page-content">
           <section className="legal-page">

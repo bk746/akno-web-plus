@@ -4,6 +4,7 @@ import { IntroProvider } from "@/components/IntroProvider";
 import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
+import { SiteFrameGrid } from "@/components/SiteFrameGrid";
 import { SiteNav } from "@/components/SiteNav";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/json-ld";
 import { createPageMetadata } from "@/lib/metadata";
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <IntroProvider>
           <PageTransitionProvider>
             <SiteNav />
+            <SiteFrameGrid />
             {children}
             <CookieBanner />
           </PageTransitionProvider>

@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import Image from "next/image";
-import line2 from "@/src/images/line2.png";
 import { EclypseOrb } from "@/components/EclypseOrb";
 import { PageEnter } from "@/components/PageEnter";
 import { ContactClock } from "@/components/ContactClock";
@@ -20,17 +18,6 @@ export const metadata: Metadata = createPageMetadata({
 export default function ContactsPage() {
   return (
     <>
-      <Image
-        src={line2}
-        alt=""
-        width={1835}
-        height={1964}
-        draggable={false}
-        className="site-grid"
-        priority
-        sizes="100vw"
-      />
-
       <PageEnter>
       <main className="page-content">
         <section className="contact-page">
