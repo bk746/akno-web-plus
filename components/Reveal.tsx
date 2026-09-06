@@ -8,6 +8,7 @@ import {
   type ElementType,
   type ReactNode,
 } from "react";
+import { shouldSkipMotionEffects } from "@/lib/device";
 
 type RevealProps = {
   as?: ElementType;
@@ -36,6 +37,11 @@ export function Reveal({
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
+
+    if (shouldSkipMotionEffects()) {
+      setVisible(true);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {

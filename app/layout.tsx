@@ -17,6 +17,13 @@ const inter = Inter({
 
 export const metadata = createPageMetadata();
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#000000",
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr" suppressHydrationWarning>

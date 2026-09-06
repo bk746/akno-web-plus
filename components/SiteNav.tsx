@@ -46,6 +46,7 @@ export function SiteNav() {
             height={78}
             draggable={false}
             priority
+            sizes="(max-width: 768px) 96px, 206px"
             className={`site-nav__logo-image ${introPending ? "" : "site-nav__logo-image--ready"}`}
           />
         </a>

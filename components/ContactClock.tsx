@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { isMobileViewport, prefersReducedMotion } from "@/lib/device";
 
 function getParisTime(date: Date) {
   const formatter = new Intl.DateTimeFormat("fr-FR", {
@@ -25,25 +26,59 @@ function getParisTime(date: Date) {
 export function ContactClock() {
   const [now, setNow] = useState<Date | null>(null);
   const [colonVisible, setColonVisible] = useState(true);
+  const [showSeconds, setShowSeconds] = useState(false);
 
   useEffect(() => {
-    setNow(new Date());
+    const liveSeconds =
+      !isMobileViewport() && !prefersReducedMotion();
 
-    const tick = window.setInterval(() => {
-      setNow(new Date());
-    }, 1000);
+    setShowSeconds(liveSeconds);
 
-    const blink = window.setInterval(() => {
-      setColonVisible((visible) => !visible);
-    }, 500);
+    const update = () => setNow(new Date());
+    update();
+
+    let tick = window.setInterval(update, liveSeconds ? 1000 : 60000);
+    let blink: number | undefined;
+
+    if (liveSeconds) {
+      blink = window.setInterval(() => {
+        setColonVisible((visible) => !visible);
+      }, 500);
+    }
+
+    const pause = () => {
+      window.clearInterval(tick);
+      if (blink !== undefined) window.clearInterval(blink);
+      blink = undefined;
+    };
+
+    const resume = () => {
+      pause();
+      update();
+      tick = window.setInterval(update, liveSeconds ? 1000 : 60000);
+      if (liveSeconds) {
+        blink = window.setInterval(() => {
+          setColonVisible((visible) => !visible);
+        }, 500);
+      }
+    };
+
+    const onVisibility = () => {
+      if (document.hidden) pause();
+      else resume();
+    };
+
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      window.clearInterval(tick);
-      window.clearInterval(blink);
+      pause();
+      document.removeEventListener("visibilitychange", onVisibility);
     };
   }, []);
 
-  const parts = now ? getParisTime(now) : { hours: "00", minutes: "00", seconds: "00" };
+  const parts = now
+    ? getParisTime(now)
+    : { hours: "00", minutes: "00", seconds: "00" };
 
   return (
     <div className="contact-clock">
@@ -51,11 +86,19 @@ export function ContactClock() {
       <div className="contact-clock__content">
         <p className="contact-clock__time" aria-live="polite">
           <span>{parts.hours}</span>
-          <span className={colonVisible ? "contact-clock__colon" : "contact-clock__colon contact-clock__colon--hidden"}>
+          <span
+            className={
+              colonVisible
+                ? "contact-clock__colon"
+                : "contact-clock__colon contact-clock__colon--hidden"
+            }
+          >
             :
           </span>
           <span>{parts.minutes}</span>
-          <span className="contact-clock__seconds">{parts.seconds}</span>
+          {showSeconds ? (
+            <span className="contact-clock__seconds">{parts.seconds}</span>
+          ) : null}
         </p>
         <p className="contact-clock__location">France</p>
         <p className="contact-clock__timezone">Paris · UTC+1</p>

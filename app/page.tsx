@@ -34,21 +34,21 @@ export default function Home() {
             <Image
               src={eclypse}
               alt=""
-              priority
+              fetchPriority="low"
               sizes="(max-width: 768px) 34vw, 18vw"
               className="hero-frame__orb hero-frame__orb--top"
             />
             <Image
               src={eclypse}
               alt=""
-              priority
+              fetchPriority="low"
               sizes="(max-width: 768px) 65vw, 42vw"
               className="hero-frame__orb hero-frame__orb--left"
             />
             <Image
               src={eclypse}
               alt=""
-              priority
+              fetchPriority="low"
               sizes="(max-width: 768px) 65vw, 42vw"
               className="hero-frame__orb hero-frame__orb--right"
             />

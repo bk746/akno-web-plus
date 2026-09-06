@@ -29,6 +29,7 @@ export function EclypseOrb({
         width={1218}
         height={1218}
         draggable={false}
+        loading={variant === "section" ? "lazy" : undefined}
         className="eclypse-orbit__frame eclypse-orbit__frame--a"
         sizes="(max-width: 768px) 40vw, 20vw"
       />
@@ -38,6 +39,7 @@ export function EclypseOrb({
         width={1218}
         height={1218}
         draggable={false}
+        loading={variant === "section" ? "lazy" : undefined}
         className="eclypse-orbit__frame eclypse-orbit__frame--b"
         sizes="(max-width: 768px) 40vw, 20vw"
       />

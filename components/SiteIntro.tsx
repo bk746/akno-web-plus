@@ -5,13 +5,7 @@ import Image from "next/image";
 import logoAkno from "@/src/images/logo-akno-plus.png";
 import { EclypseOrb } from "@/components/EclypseOrb";
 import { useIntro } from "@/components/IntroProvider";
-
-function prefersReducedMotion() {
-  return (
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  );
-}
+import { isMobileViewport, prefersReducedMotion } from "@/lib/device";
 
 export function SiteIntro() {
   const { completeIntro, skipIntro } = useIntro();
@@ -29,7 +23,7 @@ export function SiteIntro() {
       timersRef.current.push(window.setTimeout(callback, delay));
     };
 
-    if (prefersReducedMotion()) {
+    if (prefersReducedMotion() || isMobileViewport()) {
       skipIntro();
       return clearTimers;
     }
@@ -100,7 +94,6 @@ export function SiteIntro() {
               width={206}
               height={78}
               draggable={false}
-              priority
               className="site-intro__brand-logo"
             />
           </div>

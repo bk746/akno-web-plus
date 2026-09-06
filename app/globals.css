@@ -7,11 +7,26 @@ body {
   color: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5.5rem;
+}
+
+a,
+button,
+[role="button"] {
+  touch-action: manipulation;
+}
+
+button,
+.menu-toggle,
+.hero-frame__button,
+.cookie-banner__btn {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .site-header {
@@ -331,27 +346,57 @@ html {
 }
 
 @media (max-width: 768px) {
-  .hero-frame__grid {
-    border-inline: 0;
-    background: none;
+  .hero-frame {
+    background:
+      radial-gradient(ellipse 95% 60% at 50% 36%, rgba(18, 28, 52, 0.42), transparent 58%),
+      radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.92), transparent 48%),
+      #000;
+  }
+
+  .hero-frame::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.78) 0%,
+        rgba(0, 0, 0, 0.38) 36%,
+        rgba(0, 0, 0, 0.52) 66%,
+        rgba(0, 0, 0, 0.86) 100%
+      ),
+      radial-gradient(
+        ellipse 110% 85% at 50% 58%,
+        rgba(0, 0, 0, 0.08) 0%,
+        rgba(0, 0, 0, 0.72) 100%
+      );
+  }
+
+  .hero-frame__orb {
+    opacity: 0.52;
   }
 
   .hero-frame__orb--top {
     top: 1%;
     left: calc(50% - 3.5rem);
     width: 7rem;
+    filter: hue-rotate(-30deg) saturate(1.15) brightness(0.9);
   }
 
   .hero-frame__orb--left {
     bottom: 5%;
     left: -31%;
     width: 18.5rem;
+    filter: saturate(1.05) brightness(0.88) contrast(1.02);
   }
 
   .hero-frame__orb--right {
     right: -39%;
     bottom: 5%;
     width: 17.5rem;
+    filter: hue-rotate(-72deg) saturate(1.05) brightness(0.86);
   }
 
   .hero-frame__content {
@@ -4650,6 +4695,40 @@ html.intro-complete .hero-orb-enter {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-frame__orb {
+    animation: none;
+    filter: none;
+  }
+
+  .eclypse-orbit,
+  .eclypse-orbit-drift,
+  .section-orb .eclypse-orbit {
+    animation: none !important;
+  }
+
+  .menu-overlay,
+  .contact-clock__card,
+  .cookie-banner__inner,
+  .service-popup__drawer {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .project-sheet__backdrop-image {
+    filter: none;
+  }
+
+  .service-popup__bg-glow {
+    filter: none;
+  }
+
+  .faq-item__panel,
+  .faq-item__panel-inner {
+    transition: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
   .site-intro {
     display: none !important;
   }
@@ -4671,6 +4750,33 @@ html.intro-complete .hero-orb-enter {
 
   .site-frame-grid {
     display: none;
+  }
+
+  .hero-frame__orb {
+    animation: none;
+    will-change: auto;
+  }
+
+  .menu-overlay,
+  .contact-clock__card,
+  .cookie-banner__inner,
+  .service-popup__drawer {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .project-sheet__backdrop-image {
+    filter: none;
+    opacity: 0.35;
+  }
+
+  .realisations,
+  .services-scroll,
+  .about,
+  .faq,
+  .cta {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 720px;
   }
 
   .realisations {
@@ -4703,6 +4809,10 @@ html.intro-complete .hero-orb-enter {
   .hero-btn,
   .hero-cta .hero-btn {
     touch-action: pan-y;
+  }
+
+  .hero-frame__button:active {
+    transform: scale(0.98);
   }
 }
 
