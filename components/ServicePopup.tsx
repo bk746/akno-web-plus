@@ -10,9 +10,15 @@ type ServicePopupProps = {
   isOpen: boolean;
   onClose: () => void;
   service: Service | null;
+  initialOfferId?: string | null;
 };
 
-export function ServicePopup({ isOpen, onClose, service }: ServicePopupProps) {
+export function ServicePopup({
+  isOpen,
+  onClose,
+  service,
+  initialOfferId = null,
+}: ServicePopupProps) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [animated, setAnimated] = useState(false);
@@ -36,10 +42,14 @@ export function ServicePopup({ isOpen, onClose, service }: ServicePopupProps) {
   }, []);
 
   useEffect(() => {
-    if (isOpen && service?.offers?.[0]) {
-      setSelectedOfferId(service.offers[0].id);
-    }
-  }, [isOpen, service]);
+    if (!isOpen || !service?.offers?.length) return;
+
+    const matchedOffer = initialOfferId
+      ? service.offers.find((offer) => offer.id === initialOfferId)
+      : null;
+
+    setSelectedOfferId(matchedOffer?.id ?? service.offers[0].id);
+  }, [initialOfferId, isOpen, service]);
 
   useEffect(() => {
     if (!mounted) return;
@@ -50,7 +60,7 @@ export function ServicePopup({ isOpen, onClose, service }: ServicePopupProps) {
 
       const animateTimer = window.setTimeout(() => {
         setAnimated(true);
-      }, 20);
+      }, 120);
 
       return () => {
         window.clearTimeout(animateTimer);
@@ -196,7 +206,6 @@ export function ServicePopup({ isOpen, onClose, service }: ServicePopupProps) {
                     hidden={!isSelected}
                     className={`service-popup__offer-panel ${animated && isSelected ? "service-popup__offer-panel--open" : ""}`}
                   >
-                    <p className="service-popup__offer-panel-price">{offer.price}</p>
                     <p className="service-popup__offer-panel-desc">{offer.description}</p>
                   </div>
                   );

@@ -41,7 +41,7 @@ export function ContactForm() {
 
     if (offer) {
       setMessage(
-        `Bonjour,\n\nJe souhaite un devis pour l'offre « ${offer.name} » (${service.title}) — ${offer.price}.`,
+        `Bonjour,\n\nJe souhaite un devis pour l'offre « ${offer.name} » (${service.title}).`,
       );
       return;
     }

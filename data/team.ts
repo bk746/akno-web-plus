@@ -1,5 +1,5 @@
 import type { StaticImageData } from "next/image";
-import keryanPhoto from "@/src/images/keryan-bouzerda.png";
+import keryanPhoto from "@/src/images/keryan-bouzerda.jpg";
 import louisePhoto from "@/src/images/louise-lejoille.jpg";
 
 export type TeamMember = {
@@ -8,6 +8,7 @@ export type TeamMember = {
   role: string;
   image: StaticImageData;
   imagePosition?: string;
+  imageScale?: number;
 };
 
 export const teamMembers: TeamMember[] = [
@@ -23,6 +24,7 @@ export const teamMembers: TeamMember[] = [
     name: "Louise Lejoille",
     role: "UI/UX Designer",
     image: louisePhoto,
-    imagePosition: "center center",
+    imagePosition: "center 68%",
+    imageScale: 1.35,
   },
 ];

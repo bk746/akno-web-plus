@@ -50,11 +50,14 @@ export function AboutSection() {
                   loading="lazy"
                   className="about-member__photo"
                   sizes="(max-width: 768px) 80vw, 280px"
-                  style={
-                    member.imagePosition
+                  style={{
+                    ...(member.imagePosition
                       ? { objectPosition: member.imagePosition }
-                      : undefined
-                  }
+                      : {}),
+                    ...(member.imageScale
+                      ? { transform: `scale(${member.imageScale})` }
+                      : {}),
+                  }}
                 />
               </div>
               <h3 className="about-member__name">{member.name}</h3>

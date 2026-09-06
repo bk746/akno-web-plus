@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import line2 from "@/src/images/line2.png";
-import lineHeroAkno from "@/src/images/line-hero-akno.png";
+import buttonBlancAkno from "@/src/images/button-blanc-akno.png";
+import buttonBleuAkno from "@/src/images/button-bleu-akno.png";
 import { EclypseOrb } from "@/components/EclypseOrb";
-import { IntroProvider } from "@/components/IntroProvider";
 import { SiteIntro } from "@/components/SiteIntro";
-import { SiteNav } from "@/components/SiteNav";
 import { HomePageShell } from "@/components/HomePageShell";
 import { TransitionLink } from "@/components/TransitionLink";
 import { HeroSocialLinks } from "@/components/HeroSocialLinks";
@@ -23,13 +23,10 @@ export const metadata: Metadata = createPageMetadata({
 
 export default function Home() {
   return (
-    <IntroProvider>
     <>
       <div className="site-intro-curtain" aria-hidden="true" />
 
       <SiteIntro />
-
-      <SiteNav />
 
       <div className="site-shell">
       <Image
@@ -69,19 +66,6 @@ export default function Home() {
         />
       </div>
 
-      <div className="hero-line-wrap">
-        <Image
-          src={lineHeroAkno}
-          alt=""
-          width={3158}
-          height={248}
-          draggable={false}
-          className="hero-line-bottom hero-line-enter"
-          priority
-          sizes="100vw"
-        />
-      </div>
-
       <div className="hero-content">
         <div className="hero-copy">
           <h1 className="hero-title">
@@ -116,23 +100,29 @@ export default function Home() {
           style={{ "--hero-delay": "0.46s" } as React.CSSProperties}
         >
           <div className="hero-cta-row">
-            <TransitionLink href="/contacts" className="hero-btn hero-btn--primary">
-              <span className="hero-btn__label">Devis gratuit</span>
-              <span className="hero-btn__icon" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M3.5 8h9M9 4.5 12.5 8 9 11.5"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </span>
+            <TransitionLink href="/contacts" className="hero-btn hero-btn--primary hero-btn--png">
+              <Image
+                src={buttonBlancAkno}
+                alt=""
+                width={292}
+                height={85}
+                draggable={false}
+                className="hero-btn__img"
+                priority
+              />
+              <span className="hero-btn__text">Devis gratuit</span>
             </TransitionLink>
-            <a href="#realisations" className="hero-btn hero-btn--secondary">
-              <span className="hero-btn__label">Nos réalisations</span>
-            </a>
+            <TransitionLink href="/#realisations" className="hero-btn hero-btn--secondary hero-btn--png">
+              <Image
+                src={buttonBleuAkno}
+                alt=""
+                width={292}
+                height={85}
+                draggable={false}
+                className="hero-btn__img"
+              />
+              <span className="hero-btn__text">Nos réalisations</span>
+            </TransitionLink>
           </div>
           <div className="hero-reassurance-block">
             <p className="hero-reassurance">
@@ -153,7 +143,9 @@ export default function Home() {
 
     <RealisationsSection />
 
-    <ServicesSection />
+    <Suspense fallback={null}>
+      <ServicesSection />
+    </Suspense>
 
     <CtaSection />
 
@@ -165,6 +157,5 @@ export default function Home() {
       </HomePageShell>
       </div>
     </>
-    </IntroProvider>
   );
 }

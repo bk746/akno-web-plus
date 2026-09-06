@@ -4,7 +4,6 @@ import line2 from "@/src/images/line2.png";
 import { Footer } from "@/components/Footer";
 import { PageEnter } from "@/components/PageEnter";
 import { Reveal } from "@/components/Reveal";
-import { SiteNav } from "@/components/SiteNav";
 import { contactInfo } from "@/data/contact";
 import { legalInfo } from "@/data/legal";
 import { siteConfig } from "@/data/site";
@@ -32,8 +31,6 @@ export default function MentionsLegalesPage() {
         priority
         sizes="100vw"
       />
-
-      <SiteNav />
 
       <PageEnter>
         <main className="page-content">
@@ -106,7 +103,7 @@ export default function MentionsLegalesPage() {
               </Reveal>
 
               <Reveal className="legal-page__block" y={24} delay={0.26}>
-                <h2>Cookies</h2>
+                <h2 id="cookies">Cookies</h2>
                 <p>
                   Ce site n&apos;utilise pas de cookies publicitaires ou de traçage tiers par
                   défaut. Des cookies techniques peuvent être déposés par l&apos;hébergeur ou

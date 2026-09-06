@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { Reveal } from "@/components/Reveal";
 import { EclypseOrb } from "@/components/EclypseOrb";
@@ -8,6 +9,11 @@ import { AnimatedText } from "@/components/AnimatedText";
 import { TransitionLink } from "@/components/TransitionLink";
 import { services } from "@/data/services";
 import { ServicePopup } from "@/components/ServicePopup";
+import {
+  runServiceDeepLink,
+  SERVICE_DEEP_LINK_EVENT,
+  type ServiceDeepLinkDetail,
+} from "@/lib/service-deep-link";
 
 const MOBILE_BREAKPOINT = 768;
 const VISIBLE_CARDS = 3;
@@ -30,7 +36,11 @@ export function ServicesSection() {
   const currentIndexRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const [initialOfferId, setInitialOfferId] = useState<string | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const searchParams = useSearchParams();
+  const deepLinkRunRef = useRef(0);
+  const handledSearchRef = useRef("");
   const [activeSlide, setActiveSlide] = useState(0);
   const activeSlideRef = useRef(0);
   const maxIndex = Math.max(0, services.length - VISIBLE_CARDS);
@@ -177,13 +187,75 @@ export function ServicesSection() {
     };
   }, [maxIndex, selectedIndex]);
 
-  const openService = (index: number) => {
+  const openService = (index: number, offerId: string | null = null) => {
+    setInitialOfferId(offerId);
     setSelectedIndex(index);
   };
 
   const closeService = () => {
     setSelectedIndex(null);
+    setInitialOfferId(null);
+
+    if (searchParams.get("service")) {
+      window.history.replaceState(null, "", `${window.location.pathname}#services`);
+    }
   };
+
+  const playDeepLink = useCallback(
+    async (serviceId: string, offerId: string | null = null) => {
+      const runId = ++deepLinkRunRef.current;
+
+      const result = await runServiceDeepLink({
+        serviceId,
+        offerId,
+        scrollContainer: scrollRef.current,
+        carousel: carouselRef.current,
+        maxIndex,
+        isMobile: isMobileViewport(),
+      });
+
+      if (!result || runId !== deepLinkRunRef.current) return;
+
+      if (!isMobileViewport() && trackRef.current) {
+        const targetSlide = Math.min(Math.max(result.serviceIndex - 1, 0), maxIndex);
+        currentIndexRef.current = targetSlide;
+        targetIndexRef.current = targetSlide;
+        trackRef.current.style.setProperty("--slide-index", targetSlide.toFixed(4));
+      }
+
+      openService(result.serviceIndex, result.offerId);
+    },
+    [maxIndex],
+  );
+
+  useEffect(() => {
+    const onDeepLink = (event: Event) => {
+      const { serviceId, offerId } = (event as CustomEvent<ServiceDeepLinkDetail>).detail;
+      void playDeepLink(serviceId, offerId ?? null);
+    };
+
+    window.addEventListener(SERVICE_DEEP_LINK_EVENT, onDeepLink);
+    return () => window.removeEventListener(SERVICE_DEEP_LINK_EVENT, onDeepLink);
+  }, [playDeepLink]);
+
+  useEffect(() => {
+    const serviceId = searchParams.get("service");
+    const offerId = searchParams.get("offer");
+
+    if (!serviceId) return;
+
+    const key = `${serviceId}:${offerId ?? ""}`;
+    if (handledSearchRef.current === key) return;
+    handledSearchRef.current = key;
+
+    const timer = window.setTimeout(() => {
+      void playDeepLink(serviceId, offerId).then(() => {
+        window.history.replaceState(null, "", `${window.location.pathname}#services`);
+      });
+    }, 180);
+
+    return () => window.clearTimeout(timer);
+  }, [playDeepLink, searchParams]);
 
   return (
     <>
@@ -277,6 +349,7 @@ export function ServicesSection() {
         isOpen={selectedIndex !== null}
         onClose={closeService}
         service={selectedIndex !== null ? services[selectedIndex] : null}
+        initialOfferId={initialOfferId}
       />
     </>
   );

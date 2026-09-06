@@ -1,7 +1,10 @@
 import { Inter } from "next/font/google";
-import { IntroBoot } from "@/components/IntroBoot";
+import { introBootScript } from "@/components/IntroBoot";
+import { IntroProvider } from "@/components/IntroProvider";
+import { CookieBanner } from "@/components/CookieBanner";
 import { JsonLd } from "@/components/JsonLd";
 import { PageTransitionProvider } from "@/components/PageTransitionProvider";
+import { SiteNav } from "@/components/SiteNav";
 import { organizationJsonLd, websiteJsonLd } from "@/lib/json-ld";
 import { createPageMetadata } from "@/lib/metadata";
 import "./globals.css";
@@ -15,8 +18,9 @@ export const metadata = createPageMetadata();
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fr">
+    <html lang="fr" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: introBootScript }} />
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -26,10 +30,15 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           }}
         />
       </head>
-      <body className={inter.className}>
-        <IntroBoot />
+      <body className={inter.className} suppressHydrationWarning>
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
-        <PageTransitionProvider>{children}</PageTransitionProvider>
+        <IntroProvider>
+          <PageTransitionProvider>
+            <SiteNav />
+            {children}
+            <CookieBanner />
+          </PageTransitionProvider>
+        </IntroProvider>
       </body>
     </html>
   );

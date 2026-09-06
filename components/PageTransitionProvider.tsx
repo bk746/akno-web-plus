@@ -10,6 +10,7 @@ import {
   type ReactNode,
 } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { scrollToHashWhenReady } from "@/lib/smooth-scroll";
 
 export const HOME_CONTACTS_EXIT_FADE_MS = 420;
 
@@ -97,6 +98,19 @@ export function PageTransitionProvider({ children }: { children: ReactNode }) {
       if (homeExitTimerRef.current) clearTimeout(homeExitTimerRef.current);
     };
   }, []);
+
+  useEffect(() => {
+    if (normalizePath(pathname ?? "/") !== "/") return;
+
+    const hash = window.location.hash;
+    if (!hash || hash.length <= 1) return;
+
+    const timer = window.setTimeout(() => {
+      void scrollToHashWhenReady(hash);
+    }, 160);
+
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
 
   useEffect(() => {
     if (phase !== "out") return;

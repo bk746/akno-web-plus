@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import Image from "next/image";
 import line2 from "@/src/images/line2.png";
 import { EclypseOrb } from "@/components/EclypseOrb";
-import { SiteNav } from "@/components/SiteNav";
 import { PageEnter } from "@/components/PageEnter";
 import { ContactClock } from "@/components/ContactClock";
 import { ContactForm } from "@/components/ContactForm";
@@ -31,8 +30,6 @@ export default function ContactsPage() {
         priority
         sizes="100vw"
       />
-
-      <SiteNav />
 
       <PageEnter>
       <main className="page-content">

@@ -34,9 +34,10 @@ export function SiteNav() {
 
   return (
     <>
-      <header
-        className={`site-nav hero-header-enter ${introPending ? "site-nav--intro-pending" : "site-nav--intro-ready"}`}
-      >
+      <div className="site-header">
+        <header
+          className={`site-nav hero-header-enter ${introPending ? "site-nav--intro-pending" : "site-nav--intro-ready"}`}
+        >
         <a href="/" className="site-nav__logo" aria-label="Retour à l'accueil">
           <Image
             src={logoAkno}
@@ -73,7 +74,8 @@ export function SiteNav() {
             className="menu-toggle__icon menu-toggle__icon--cross"
           />
         </button>
-      </header>
+        </header>
+      </div>
 
       <div
         className={`menu-overlay ${open ? "menu-overlay--open" : ""}`}
