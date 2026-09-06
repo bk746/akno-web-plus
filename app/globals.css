@@ -49,20 +49,24 @@ button,
   border-bottom: 1px solid transparent;
 }
 
-.site-nav--intro-pending .site-nav__logo-image {
+.site-nav--intro-pending .site-nav__logo-image,
+html.intro-pending .site-nav .site-nav__logo-image {
   opacity: 0;
 }
 
-.site-nav--intro-pending .menu-toggle {
+.site-nav--intro-pending .menu-toggle,
+html.intro-pending .site-nav .menu-toggle {
   opacity: 0;
   pointer-events: none;
 }
 
-.site-nav--intro-ready .site-nav__logo-image--ready {
+.site-nav--intro-ready .site-nav__logo-image--ready,
+html.intro-complete .site-nav .site-nav__logo-image {
   animation: intro-nav-logo-in 0.45s cubic-bezier(0.76, 0, 0.24, 1) forwards;
 }
 
-.site-nav--intro-ready .menu-toggle {
+.site-nav--intro-ready .menu-toggle,
+html.intro-complete .site-nav .menu-toggle {
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.45s cubic-bezier(0.76, 0, 0.24, 1) 0.12s;

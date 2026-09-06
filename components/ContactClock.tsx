@@ -84,7 +84,7 @@ export function ContactClock() {
     <div className="contact-clock">
       <div className="contact-clock__card" aria-hidden="true" />
       <div className="contact-clock__content">
-        <p className="contact-clock__time" aria-live="polite">
+        <p className="contact-clock__time" aria-live="polite" suppressHydrationWarning>
           <span>{parts.hours}</span>
           <span
             className={
