@@ -2,12 +2,15 @@ import Image from "next/image";
 import eclypse2 from "@/src/images/eclypse2-x2.png";
 import eclypse3 from "@/src/images/eclypse3X2.png";
 
+export type EclypseOrbTone = "cyan" | "blue" | "green";
+
 type EclypseOrbProps = {
   className?: string;
   opacity?: number;
   animationDelay?: string;
   enterDelay?: string;
   variant?: "section" | "hero";
+  tone?: EclypseOrbTone;
 };
 
 export function EclypseOrb({
@@ -16,6 +19,7 @@ export function EclypseOrb({
   animationDelay = "0s",
   enterDelay,
   variant = "section",
+  tone = "blue",
 }: EclypseOrbProps) {
   const orbit = (
     <div className="eclypse-orbit relative">
@@ -42,7 +46,7 @@ export function EclypseOrb({
 
   return (
     <div
-      className={`section-orb ${className}`.trim()}
+      className={`section-orb hero-orb-tone--${tone} ${className}`.trim()}
       style={
         {
           opacity,
@@ -53,7 +57,7 @@ export function EclypseOrb({
       aria-hidden="true"
     >
       {variant === "hero" ? (
-        <div className="eclypse-orbit-wrap">{orbit}</div>
+        <div className="eclypse-orbit-drift">{orbit}</div>
       ) : (
         orbit
       )}
