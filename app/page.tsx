@@ -17,6 +17,9 @@ import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/",
+  title: "AKNO — Agence Web | Sites & Produits Digitaux Sur Mesure",
+  description:
+    "AKNO conçoit des sites sur mesure pour les marques françaises. Devis sous 24h · Sites vitrines, e-commerce et identité digitale · Sans template revendu. Votre projet, notre équipe.",
 });
 
 export default function Home() {

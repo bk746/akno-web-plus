@@ -8,7 +8,10 @@ export function organizationJsonLd() {
     "@type": "ProfessionalService",
     "@id": `${siteConfig.url}/#organization`,
     name: siteConfig.name,
+    alternateName: [...siteConfig.alternateNames],
     url: siteConfig.url,
+    logo: `${siteConfig.url}/icon-512.png`,
+    image: `${siteConfig.url}/icon-512.png`,
     description: siteConfig.description,
     email: contactInfo.email,
     telephone: contactInfo.phoneTel,
@@ -18,6 +21,11 @@ export function organizationJsonLd() {
       postalCode: legalInfo.headquarters.postalCode,
       addressRegion: "Haute-Savoie",
       addressCountry: "FR",
+    },
+    brand: {
+      "@type": "Brand",
+      name: siteConfig.name,
+      alternateName: [...siteConfig.alternateNames],
     },
     founder: {
       "@type": "Person",
@@ -46,6 +54,7 @@ export function websiteJsonLd() {
     "@id": `${siteConfig.url}/#website`,
     url: siteConfig.url,
     name: siteConfig.name,
+    alternateName: [...siteConfig.alternateNames],
     description: siteConfig.description,
     publisher: {
       "@id": `${siteConfig.url}/#organization`,

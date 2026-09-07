@@ -18,15 +18,28 @@ export function createPageMetadata({
   const canonical = `${siteConfig.url}${path}`;
 
   return {
-    title: pageTitle,
+    metadataBase: new URL(siteConfig.url),
+    title: {
+      default: pageTitle,
+      template: `%s | ${siteConfig.name}`,
+    },
     description: pageDescription,
+    applicationName: siteConfig.name,
     keywords: [...siteConfig.keywords],
     authors: [{ name: siteConfig.legalName, url: siteConfig.url }],
     creator: siteConfig.name,
     publisher: siteConfig.name,
-    metadataBase: new URL(siteConfig.url),
     alternates: {
       canonical,
+    },
+    icons: {
+      icon: [
+        { url: "/icon.png", sizes: "32x32", type: "image/png" },
+        { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+        { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+      ],
+      apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
+      shortcut: "/icon.png",
     },
     openGraph: {
       type: "website",
@@ -35,11 +48,20 @@ export function createPageMetadata({
       siteName: siteConfig.name,
       title: pageTitle,
       description: pageDescription,
+      images: [
+        {
+          url: "/icon-512.png",
+          width: 512,
+          height: 512,
+          alt: "AKNO — Agence web",
+        },
+      ],
     },
     twitter: {
-      card: "summary_large_image",
+      card: "summary",
       title: pageTitle,
       description: pageDescription,
+      images: ["/icon-512.png"],
     },
     robots: noIndex
       ? { index: false, follow: false }
